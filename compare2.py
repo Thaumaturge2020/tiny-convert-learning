@@ -4,6 +4,7 @@ import torch.optim as optim
 import torchvision.transforms as transforms
 from torchvision.datasets import CIFAR10
 from torch.utils.data import DataLoader
+import sys
 
 from dataset_loader import MyDataset_load_differ
 
@@ -96,8 +97,8 @@ model.to(device)
 
 num_epochs = 1000
 
-# state_dict = torch.load('model_v6_partial_40_1000.pth')
-# model.load_state_dict(state_dict)
+state_dict = torch.load('model_v6_partial_40_1000.pth')
+model.load_state_dict(state_dict)
 
 for epoch in range(num_epochs):
     total_loss = 0

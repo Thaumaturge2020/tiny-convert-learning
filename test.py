@@ -1,5 +1,5 @@
 import torch
-
+import sys
 
 x = torch.ones(2, 2)
 print(x)
@@ -32,3 +32,7 @@ z = torch.logical_xor(x,y)
 w = torch.logical_not(z)
 
 print(w,z)
+
+args = sys.argv
+
+print(args)

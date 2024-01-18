@@ -17,7 +17,9 @@ class SiameseNetwork(nn.Module):
             nn.Conv1d(64,128,kernel_size=5,padding=1),
             nn.ReLU(inplace=True),
             nn.MaxPool1d(kernel_size=2,stride=2,padding=1),
-            nn.Linear(2500,5)
+            nn.Linear(2500,100),
+            nn.ReLU(inplace=True),
+            nn.Linear(100,5)
         )
         self.fc = nn.Sequential(
             nn.Linear(128*5,1024),
