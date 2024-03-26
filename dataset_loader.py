@@ -12,7 +12,7 @@ dT = 0.002
 class MyDataset_load_differ(Dataset):
     def __init__(self,datapath):
         constractive_list = []
-        for i in range(0,10):
+        for i in range(0,2):
             for j in range(0,10):
                 for k in range(0,j):
                     I = i+1
@@ -27,7 +27,7 @@ class MyDataset_load_differ(Dataset):
                     constractive_list.append((a,b,c))
 
         
-        for i in range(0,10):
+        for i in range(0,2):
             for j in range(0,j):
                 for k in range(0,10,2):
                     for w in range(0,10,3):
@@ -56,22 +56,20 @@ class MyDataset_load_differ(Dataset):
         c = c
         a = torch.tensor(a)
 
-        while(a.shape[1] + a.shape[1] < self.given_length):
-            a = torch.nn.functional.pad(a,(0,a.shape[1]),mode="circular")
-        a = torch.nn.functional.pad(a,(0,self.given_length-a.shape[1]),mode="circular")
+        while(a.shape[1] < self.given_length):
+            a = a.repeat(1,2)
+        a = a[:,0:self.given_length]
 
         b = torch.tensor(b)
         
-        while(b.shape[1] + b.shape[1] < self.given_length):
-            b = torch.nn.functional.pad(b,(0,b.shape[1]),mode="circular")
-        b = torch.nn.functional.pad(b,(0,self.given_length-b.shape[1]),mode="circular")
+        while(b.shape[1] < self.given_length):
+            b = b.repeat(1,2)
+        b = b[:,0:self.given_length]
         
         c = c
 
         a = a.float()
         b = b.float()
-
-        # print(a.shape,b.shape)
 
         return a,b,c
     
